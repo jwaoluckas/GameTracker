@@ -1,0 +1,25 @@
+# Dependências (o projeto não usa nenhuma hoje, mas evita subir se alguém instalar algo futuramente)
+node_modules/
+package-lock.json
+
+# Variáveis de ambiente / segredos
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores / IDEs
+.vscode/
+.idea/
+*.swp
+
+# Arquivos temporários de teste usados durante o desenvolvimento
+mobile-preview.html

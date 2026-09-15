@@ -1,0 +1,75 @@
+/* =========================================================
+   GameTracker — Tela de Login (index.html)
+   Depende de shared/base.css (tokens, reset, botões, cards,
+   campos, toasts).
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   Blobs decorativos desta tela
+   --------------------------------------------------------- */
+.blob-login-1 { width: 420px; height: 420px; left: -160px; top: 640px; }
+.blob-login-2 { width: 520px; height: 520px; right: -140px; top: -180px; }
+
+/* ---------------------------------------------------------
+   Cabeçalho da marca (exclusivo do login — biblioteca/jogo
+   usam .app-header)
+   --------------------------------------------------------- */
+.brand-header {
+  position: relative;
+  z-index: 1;
+  padding: 32px var(--side-pad) 0;
+}
+
+body.page-login .center-stage { min-height: calc(100vh - 104px); }
+
+/* ---------------------------------------------------------
+   Card de login
+   --------------------------------------------------------- */
+.login-card { max-width: 420px; }
+
+/* ---------------------------------------------------------
+   Campo de senha com botão de mostrar/ocultar ("olhinho")
+   --------------------------------------------------------- */
+.password-wrap { position: relative; }
+.password-wrap input { padding-right: 44px; }
+
+.password-toggle {
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  border-radius: var(--radius-xs);
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.password-toggle:hover { color: #fff; }
+.password-toggle:focus-visible { outline: 2px solid var(--pink); outline-offset: 2px; }
+.password-toggle svg { width: 18px; height: 18px; }
+
+/* ---------------------------------------------------------
+   Link "Cadastre-se"
+   --------------------------------------------------------- */
+.helper-line {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 20px;
+}
+
+.link-strong { color: var(--pink); font-weight: 700; cursor: pointer; }
+.link-strong:hover { text-decoration: underline; }
+
+/* =========================================================
+   Responsive — Mobile
+   ========================================================= */
+@media (max-width: 640px) {
+  .brand-header { padding: 24px 20px 0; }
+}

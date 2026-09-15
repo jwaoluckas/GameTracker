@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GameTracker · Adicionar/Editar Jogo</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ff4fa3'/%3E%3Cstop offset='1' stop-color='%238b2ff0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='40' height='40' rx='10' fill='url(%23g)'/%3E%3Ctext x='20' y='26' font-family='Arial' font-weight='bold' font-size='15' fill='white' text-anchor='middle'%3EGT%3C/text%3E%3C/svg%3E">
+<!-- Projeto 100% offline: sem CDNs externos. Tipografia usa a stack de fontes do sistema (ver shared/base.css). -->
+<link rel="stylesheet" href="../shared/base.css">
+<link rel="stylesheet" href="jogo.css">
+</head>
+<body class="page-app">
+
+<div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+<div id="confirm-modal" class="modal-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="confirm-modal-title">
+  <div class="modal-card">
+    <p id="confirm-modal-title" class="modal-title"></p>
+    <div class="modal-actions">
+      <button type="button" id="confirm-modal-cancel" class="btn btn-secondary btn-block">Cancelar</button>
+      <button type="button" id="confirm-modal-ok" class="btn btn-danger-solid btn-block">Remover</button>
+    </div>
+  </div>
+</div>
+
+<div class="blob blob-purple blob-form-1" aria-hidden="true"></div>
+<div class="blob blob-pink blob-form-2" aria-hidden="true"></div>
+
+<div class="page-shell">
+  <header class="app-header form-header">
+    <button type="button" id="back-btn" class="icon-btn" aria-label="Voltar">←</button>
+    <span id="form-header-title" class="header-title">Novo Jogo</span>
+  </header>
+
+  <main class="app-body center-stage">
+    <div class="card form-card">
+      <div class="form-heading">
+        <h1 id="form-title">Adicionar Jogo</h1>
+        <p id="form-subtitle">Preencha os dados do jogo que você quer acompanhar</p>
+      </div>
+
+      <form id="game-form" novalidate>
+        <div class="field">
+          <label for="game-title">Título do jogo</label>
+          <input type="text" id="game-title" placeholder="Ex: Tears of the Kingdom" maxlength="80">
+          <p class="field-error" data-error-for="game-title" hidden></p>
+        </div>
+
+        <div class="field">
+          <label for="game-platform">Plataforma</label>
+          <input type="text" id="game-platform" placeholder="Ex: PC, PS5, Switch" maxlength="40">
+          <p class="field-error" data-error-for="game-platform" hidden></p>
+        </div>
+
+        <div class="field">
+          <label for="game-genre">Gênero</label>
+          <input type="text" id="game-genre" placeholder="Ex: RPG, Ação, Plataforma" maxlength="40">
+          <p class="field-error" data-error-for="game-genre" hidden></p>
+        </div>
+
+        <div class="field">
+          <span class="field-label">Status</span>
+          <div class="status-toggle" role="radiogroup" aria-label="Status do jogo">
+            <button type="button" class="status-btn" data-status="fila" role="radio" aria-checked="false">Na fila</button>
+            <button type="button" class="status-btn" data-status="jogando" role="radio" aria-checked="false">Jogando</button>
+            <button type="button" class="status-btn" data-status="platinado" role="radio" aria-checked="false">Platinado</button>
+          </div>
+        </div>
+
+        <div class="field field-rating">
+          <span class="field-label">Sua nota</span>
+          <div class="star-input" id="star-input" role="radiogroup" aria-label="Sua nota de 1 a 5 estrelas">
+            <button type="button" class="star" data-value="1" role="radio" aria-checked="false" aria-label="1 estrela">★</button>
+            <button type="button" class="star" data-value="2" role="radio" aria-checked="false" aria-label="2 estrelas">★</button>
+            <button type="button" class="star" data-value="3" role="radio" aria-checked="false" aria-label="3 estrelas">★</button>
+            <button type="button" class="star" data-value="4" role="radio" aria-checked="false" aria-label="4 estrelas">★</button>
+            <button type="button" class="star" data-value="5" role="radio" aria-checked="false" aria-label="5 estrelas">★</button>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" id="delete-game-btn" class="btn btn-danger btn-block" hidden>Excluir Jogo</button>
+          <button type="button" id="cancel-btn" class="btn btn-secondary btn-block">Cancelar</button>
+          <button type="submit" class="btn btn-primary btn-block">Salvar Jogo</button>
+        </div>
+      </form>
+    </div>
+  </main>
+</div>
+
+<script src="../shared/data.js"></script>
+<script src="../shared/ui.js"></script>
+<script src="jogo.js"></script>
+</body>
+</html>

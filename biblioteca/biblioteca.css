@@ -1,0 +1,155 @@
+/* =========================================================
+   GameTracker — Tela da Biblioteca (biblioteca.html)
+   Depende de ../shared/base.css (tokens, reset, botões,
+   page-shell, app-header, app-body, toasts, modal).
+   ========================================================= */
+
+.header-actions { display: flex; align-items: center; gap: 10px; }
+
+.page-title h1 { font-size: 28px; font-weight: 700; }
+.page-title p { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+
+/* ---------------------------------------------------------
+   Filter tabs
+   --------------------------------------------------------- */
+.filter-tabs { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.tab {
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: var(--radius-pill);
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tab:hover { color: #fff; }
+.tab.active { background: var(--pink); border-color: var(--pink); color: #fff; }
+
+.label-short { display: none; }
+
+/* ---------------------------------------------------------
+   Games grid + cards
+   --------------------------------------------------------- */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.game-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  cursor: pointer;
+  transition: border-color .15s ease, transform .1s ease;
+  position: relative;
+}
+
+.game-card:hover { border-color: var(--pink); transform: translateY(-2px); }
+
+.game-thumb {
+  height: 150px;
+  border-radius: var(--radius-sm);
+  background: var(--gradient);
+  position: relative;
+}
+
+.game-delete {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-xs);
+  background: rgba(20, 10, 34, 0.55);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity .15s ease, background .15s ease;
+}
+
+.game-card:hover .game-delete,
+.game-delete:focus-visible { opacity: 1; }
+
+.game-delete:hover { background: rgba(239,68,68,0.75); border-color: transparent; }
+
+.game-title { font-size: 16px; font-weight: 700; }
+.game-meta { font-size: 12px; color: var(--text-muted); }
+
+.game-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.status-badge.fila { background: var(--tag-neutral); }
+.status-badge.jogando { background: var(--pink); }
+.status-badge.platinado { background: var(--purple); }
+
+.game-rating { font-size: 14px; font-weight: 700; color: var(--pink); letter-spacing: 1px; }
+.game-rating.empty { color: var(--text-muted); }
+
+/* ---------------------------------------------------------
+   Empty state
+   --------------------------------------------------------- */
+.empty-state {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+  padding: 56px 24px;
+  text-align: center;
+}
+.empty-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.empty-subtitle { font-size: 13px; color: var(--text-muted); }
+
+/* =========================================================
+   Responsive — Tablet
+   ========================================================= */
+@media (max-width: 1024px) {
+  .games-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+}
+
+/* =========================================================
+   Responsive — Mobile
+   ========================================================= */
+@media (max-width: 640px) {
+  .app-header { flex-wrap: wrap; row-gap: 10px; }
+  .header-actions { gap: 8px; }
+  .header-actions .btn-sm { padding: 0 14px; font-size: 13px; height: 36px; }
+
+  .page-title h1 { font-size: 22px; }
+
+  .filter-tabs { gap: 8px; }
+  .tab { padding: 6px 12px; font-size: 12px; }
+  .label-full { display: none; }
+  .label-short { display: inline; }
+
+  .games-grid { grid-template-columns: 1fr; gap: 16px; }
+  .game-delete { opacity: 1; }
+}
+
+@media (max-width: 380px) {
+  .header-actions .btn-sm { font-size: 12px; padding: 0 10px; }
+}

@@ -1,0 +1,79 @@
+/* =========================================================
+   GameTracker — Tela de Adicionar/Editar Jogo (jogo.html)
+   Depende de ../shared/base.css (tokens, reset, botões, card,
+   campos, page-shell, app-header, app-body, toasts, modal).
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   Blobs decorativos desta tela
+   --------------------------------------------------------- */
+.blob-form-1 { width: 420px; height: 420px; right: -140px; top: -160px; }
+.blob-form-2 { width: 480px; height: 480px; left: -200px; top: 500px; }
+
+/* ---------------------------------------------------------
+   Cabeçalho (botão voltar + título)
+   --------------------------------------------------------- */
+.form-header { justify-content: flex-start; gap: 10px; }
+.header-title { font-weight: 700; font-size: 20px; }
+
+/* ---------------------------------------------------------
+   Card do formulário
+   --------------------------------------------------------- */
+.form-card { max-width: 480px; }
+
+/* ---------------------------------------------------------
+   Status toggle
+   --------------------------------------------------------- */
+.status-toggle { display: flex; gap: 8px; }
+
+.status-btn {
+  flex: 1;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: var(--radius-xs);
+  padding: 10px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.status-btn:hover { color: #fff; }
+.status-btn.active { background: var(--pink); border-color: var(--pink); color: #fff; }
+
+/* ---------------------------------------------------------
+   Star rating input
+   --------------------------------------------------------- */
+.field-rating { margin-bottom: 28px; }
+
+.star-input { display: flex; gap: 6px; }
+
+.star {
+  background: none;
+  border: none;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0;
+}
+
+.star.filled { color: var(--pink); }
+
+/* ---------------------------------------------------------
+   Form actions
+   --------------------------------------------------------- */
+.form-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 4px; }
+.form-actions .btn { flex: 1; }
+.form-actions .btn-danger { flex: 0 0 100%; margin-bottom: 4px; order: -1; }
+
+/* =========================================================
+   Responsive — Mobile
+   ========================================================= */
+@media (max-width: 640px) {
+  .form-card { padding: 28px 22px; }
+  .form-actions { flex-direction: column-reverse; }
+  .form-actions .btn-danger { order: 2; margin-top: 4px; margin-bottom: 0; }
+
+  .status-toggle { flex-direction: column; }
+}
