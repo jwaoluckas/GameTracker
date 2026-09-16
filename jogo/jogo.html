@@ -40,6 +40,22 @@
       </div>
 
       <form id="game-form" novalidate>
+        <div class="field field-cover">
+          <span class="field-label">Capa do jogo</span>
+          <div class="cover-upload">
+            <div class="cover-preview" id="cover-preview">
+              <span id="cover-placeholder" class="cover-placeholder">🎮</span>
+              <img id="cover-preview-img" class="cover-preview-img" alt="Capa do jogo" hidden>
+            </div>
+            <div class="cover-upload-actions">
+              <label for="game-cover-input" class="btn btn-secondary btn-sm">Escolher imagem</label>
+              <button type="button" id="remove-cover-btn" class="btn btn-ghost btn-sm" hidden>Remover</button>
+              <input type="file" id="game-cover-input" accept="image/png,image/jpeg,image/webp" hidden>
+            </div>
+          </div>
+          <p class="field-hint">PNG, JPG ou WEBP · até 3MB · fica salva só no seu navegador</p>
+        </div>
+
         <div class="field">
           <label for="game-title">Título do jogo</label>
           <input type="text" id="game-title" placeholder="Ex: Tears of the Kingdom" maxlength="80">

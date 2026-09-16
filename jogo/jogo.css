@@ -22,6 +22,34 @@
 .form-card { max-width: 480px; }
 
 /* ---------------------------------------------------------
+   Capa do jogo (upload + preview)
+   --------------------------------------------------------- */
+.field-cover { margin-bottom: 24px; }
+
+.cover-upload { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+
+.cover-preview {
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  background: var(--gradient);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.cover-placeholder { font-size: 34px; opacity: 0.85; }
+
+.cover-preview-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.cover-upload-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.field-hint { font-size: 11px; color: var(--text-muted); margin: 8px 0 0; }
+
+/* ---------------------------------------------------------
    Status toggle
    --------------------------------------------------------- */
 .status-toggle { display: flex; gap: 8px; }

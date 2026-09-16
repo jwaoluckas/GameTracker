@@ -27,6 +27,13 @@
   const fieldPlatform = document.getElementById('game-platform');
   const fieldGenre = document.getElementById('game-genre');
 
+  const coverInput = document.getElementById('game-cover-input');
+  const coverPreviewImg = document.getElementById('cover-preview-img');
+  const coverPlaceholder = document.getElementById('cover-placeholder');
+  const removeCoverBtn = document.getElementById('remove-cover-btn');
+
+  let selectedCover = null; // dataURL (base64) da capa, ou null se não houver
+
   function initForm() {
     let game = null;
 
@@ -48,6 +55,7 @@
       fieldGenre.value = game.genre;
       selectedStatus = game.status;
       selectedRating = game.rating || 0;
+      selectedCover = game.cover || null;
       deleteGameBtn.hidden = false;
     } else {
       formTitle.textContent = 'Adicionar Jogo';
@@ -55,11 +63,13 @@
       formHeaderTitle.textContent = 'Novo Jogo';
       selectedStatus = 'fila';
       selectedRating = 0;
+      selectedCover = null;
       deleteGameBtn.hidden = true;
     }
 
     paintStatus();
     paintStars();
+    paintCover();
   }
 
   statusButtons.forEach((btn) => {
@@ -94,6 +104,80 @@
       btn.setAttribute('aria-checked', value === selectedRating ? 'true' : 'false');
     });
   }
+
+  function paintCover() {
+    if (selectedCover) {
+      coverPreviewImg.src = selectedCover;
+      coverPreviewImg.hidden = false;
+      coverPlaceholder.hidden = true;
+      removeCoverBtn.hidden = false;
+    } else {
+      coverPreviewImg.hidden = true;
+      coverPreviewImg.src = '';
+      coverPlaceholder.hidden = false;
+      removeCoverBtn.hidden = true;
+    }
+  }
+
+  // Lê o arquivo escolhido, redimensiona no canvas (mantendo proporção) e
+  // devolve um dataURL em JPEG comprimido — evita estourar o localStorage.
+  function resizeImageToDataUrl(file, maxSize) {
+    return new Promise((resolve, reject) => {
+      if (!file.type.startsWith('image/')) {
+        reject(new Error('Arquivo não é uma imagem.'));
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          let { width, height } = img;
+          if (width > maxSize || height > maxSize) {
+            if (width >= height) {
+              height = Math.round(height * (maxSize / width));
+              width = maxSize;
+            } else {
+              width = Math.round(width * (maxSize / height));
+              height = maxSize;
+            }
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+          resolve(canvas.toDataURL('image/jpeg', 0.82));
+        };
+        img.onerror = () => reject(new Error('Não foi possível ler a imagem.'));
+        img.src = e.target.result;
+      };
+      reader.onerror = () => reject(new Error('Não foi possível ler o arquivo.'));
+      reader.readAsDataURL(file);
+    });
+  }
+
+  coverInput.addEventListener('change', async () => {
+    const file = coverInput.files[0];
+    coverInput.value = ''; // permite escolher o mesmo arquivo de novo depois
+
+    if (!file) return;
+
+    if (file.size > 3 * 1024 * 1024) {
+      toast('Imagem muito grande. Escolha um arquivo de até 3MB.', true);
+      return;
+    }
+
+    try {
+      selectedCover = await resizeImageToDataUrl(file, 480);
+      paintCover();
+    } catch (err) {
+      toast('Não foi possível carregar essa imagem.', true);
+    }
+  });
+
+  removeCoverBtn.addEventListener('click', () => {
+    selectedCover = null;
+    paintCover();
+  });
 
   function clearFieldErrors() {
     document.querySelectorAll('.field-error[data-error-for]').forEach((el) => (el.hidden = true));
@@ -135,6 +219,7 @@
       genre: fieldGenre.value.trim(),
       status: selectedStatus,
       rating: selectedRating,
+      cover: selectedCover,
     };
 
     if (editingId) {

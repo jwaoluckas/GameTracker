@@ -79,8 +79,12 @@
     const ratingText = starString(game.rating);
     const ratingClass = game.rating ? '' : ' empty';
 
+    const thumbStyle = game.cover ? ` style="background-image:url('${game.cover}')"` : '';
+    const thumbLetter = escapeHtml((game.title.trim().charAt(0) || '?').toUpperCase());
+
     card.innerHTML = `
-      <div class="game-thumb">
+      <div class="game-thumb"${thumbStyle}>
+        ${game.cover ? '' : `<span class="game-thumb-letter">${thumbLetter}</span>`}
         <button type="button" class="game-delete" aria-label="Excluir ${escapeHtml(game.title)}">✕</button>
       </div>
       <p class="game-title">${escapeHtml(game.title)}</p>
