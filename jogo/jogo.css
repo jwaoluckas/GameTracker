@@ -13,7 +13,12 @@
 /* ---------------------------------------------------------
    Cabeçalho (botão voltar + título)
    --------------------------------------------------------- */
-.form-header { justify-content: flex-start; gap: 10px; }
+/* .app-header (base.css) ocupa a largura inteira do .page-shell, então o
+   cabeçalho ficava colado na borda esquerda enquanto só o .form-card era
+   centralizado — os dois nunca alinhavam, dando a impressão de que nada
+   estava centralizado. Restringir a mesma largura máxima do card e
+   centralizar o cabeçalho faz os dois compartilharem a borda esquerda. */
+.form-header { justify-content: flex-start; gap: 10px; width: 100%; max-width: 480px; margin: 0 auto 32px; }
 .header-title { font-weight: 700; font-size: 20px; }
 
 /* ---------------------------------------------------------
