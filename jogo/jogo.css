@@ -21,6 +21,16 @@
    --------------------------------------------------------- */
 .form-card { max-width: 480px; }
 
+/* O <main> desta tela combina .app-body (flex-direction: column) com
+   .center-stage — ou seja, o eixo principal do flex é vertical, controlado
+   por justify-content (não align-items). O card cresceu com o campo de capa
+   (commit "capas aos jogos") e passou a ultrapassar a altura do
+   .center-stage em telas mais baixas. Com justify-content: center puro, o
+   excesso "vaza" simetricamente para cima e para baixo — e a parte de cima
+   fica fora da área rolável, inacessível. Alinhar ao topo garante que o
+   card sempre comece dentro da área visível/rolável. */
+.center-stage { justify-content: flex-start; }
+
 /* ---------------------------------------------------------
    Capa do jogo (upload + preview)
    --------------------------------------------------------- */
@@ -41,7 +51,7 @@
   overflow: hidden;
 }
 
-.cover-placeholder { font-size: 34px; opacity: 0.85; }
+.cover-placeholder { width: 46px; height: 46px; color: var(--text-white); opacity: 0.85; }
 
 .cover-preview-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
