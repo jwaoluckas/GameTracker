@@ -27,9 +27,10 @@
    (commit "capas aos jogos") e passou a ultrapassar a altura do
    .center-stage em telas mais baixas. Com justify-content: center puro, o
    excesso "vaza" simetricamente para cima e para baixo — e a parte de cima
-   fica fora da área rolável, inacessível. Alinhar ao topo garante que o
-   card sempre comece dentro da área visível/rolável. */
-.center-stage { justify-content: flex-start; }
+   fica fora da área rolável, inacessível. "safe center" resolve os dois
+   casos: centraliza normalmente quando o card cabe, e só recua para o topo
+   (sempre rolável) quando ele é alto demais para a tela. */
+.center-stage { justify-content: safe center; }
 
 /* ---------------------------------------------------------
    Capa do jogo (upload + preview)
